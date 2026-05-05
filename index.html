@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <base target="_top">
   <style>
@@ -11,35 +12,68 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #F5F5F5 50%, #DFD7BF 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
       padding: 20px;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       background: white;
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       overflow: hidden;
     }
 
     .header {
-      background: linear-gradient(135deg, #0a1c3f 0%, #1a3a6e 100%);
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
       padding: 30px;
       text-align: center;
     }
 
     .header h1 {
-      font-size: 28px;
+      font-size: 32px;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
     }
 
     .header p {
       opacity: 0.9;
+      font-size: 15px;
+    }
+
+    .mode-selector {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .mode-btn {
+      padding: 12px 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
       font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .mode-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .mode-btn.active {
+      background: white;
+      color: #1e3c72;
+      border-color: white;
     }
 
     .main-content {
@@ -48,7 +82,8 @@
       gap: 0;
     }
 
-    .form-section, .preview-section {
+    .form-section,
+    .preview-section {
       padding: 30px;
     }
 
@@ -62,6 +97,15 @@
       background: #f8f9fa;
       max-height: 85vh;
       overflow-y: auto;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e3c72;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
     }
 
     .form-group {
@@ -82,10 +126,8 @@
     }
 
     input[type="email"],
-    input[type="url"],
     input[type="text"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
       padding: 12px 16px;
       border: 2px solid #e0e0e0;
@@ -96,8 +138,7 @@
     }
 
     input:focus,
-    textarea:focus,
-    select:focus {
+    textarea:focus {
       outline: none;
       border-color: #667eea;
       box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -108,85 +149,69 @@
       min-height: 100px;
     }
 
-    .template-grid {
+    .role-selector {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
       margin-top: 8px;
-      max-height: 300px;
-      overflow-y: auto;
-      padding: 10px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      background: #f8f9fa;
     }
 
-    .template-card {
-      padding: 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
+    .role-card {
+      padding: 20px 15px;
+      border: 3px solid #e0e0e0;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
       background: white;
+      text-align: center;
     }
 
-    .template-card:hover {
+    .role-card:hover {
       border-color: #667eea;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
     }
 
-    .template-card.selected {
+    .role-card.selected {
       border-color: #667eea;
-      background: #667eea;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
     }
 
-    .template-card h3 {
-      font-size: 13px;
+    .role-card .icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .role-card h3 {
+      font-size: 14px;
       margin-bottom: 4px;
     }
 
-    .template-card p {
-      font-size: 10px;
-      opacity: 0.7;
-    }
-
-    .optional-fields {
-      background: #f8f9fa;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-
-    .optional-header {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 12px;
-      font-weight: 500;
+    .role-card p {
+      font-size: 11px;
+      opacity: 0.8;
     }
 
     button {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 15px;
+      border-radius: 10px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.3s ease;
       margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
 
     button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    button:active {
-      transform: translateY(0);
+      box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
     }
 
     button:disabled {
@@ -199,15 +224,14 @@
       background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     }
 
-    .send-button:hover {
-      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    .bulk-button {
+      background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
     }
 
     .output {
       margin-top: 15px;
-      padding: 12px;
+      padding: 15px;
       border-radius: 8px;
-      text-align: center;
       font-weight: 500;
       font-size: 14px;
       display: none;
@@ -216,55 +240,53 @@
     .output.success {
       background: #d4edda;
       color: #155724;
-      border: 1px solid #c3e6cb;
+      border: 2px solid #c3e6cb;
       display: block;
     }
 
     .output.error {
       background: #f8d7da;
       color: #721c24;
-      border: 1px solid #f5c6cb;
+      border: 2px solid #f5c6cb;
+      display: block;
+    }
+
+    .output.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 2px solid #bee5eb;
       display: block;
     }
 
     .helper-text {
-      font-size: 11px;
+      font-size: 12px;
       color: #666;
       margin-top: 4px;
+      line-height: 1.4;
     }
 
     .loading {
       display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 3px solid rgba(255,255,255,.3);
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255, 255, 255, .3);
       border-radius: 50%;
       border-top-color: #fff;
       animation: spin 1s ease-in-out infinite;
       margin-left: 8px;
+      vertical-align: middle;
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .search-box {
-      margin-bottom: 10px;
-      position: sticky;
-      top: 0;
-      background: #f8f9fa;
-      z-index: 1;
-      padding-bottom: 8px;
-    }
-
-    .search-box input {
-      border-color: #667eea;
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .preview-header {
       font-size: 18px;
       font-weight: 600;
-      color: #0a1c3f;
+      color: #1e3c72;
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 2px solid #e0e0e0;
@@ -281,19 +303,14 @@
     .preview-empty {
       text-align: center;
       color: #999;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
 
     .preview-empty svg {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 15px;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
       opacity: 0.3;
-    }
-
-    .email-preview {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
     }
 
     .email-subject {
@@ -324,87 +341,6 @@
       display: block;
     }
 
-    .email-content {
-      white-space: pre-wrap;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .editable-content {
-      width: 100%;
-      min-height: 400px;
-      padding: 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.8;
-      resize: vertical;
-      white-space: normal;
-      overflow-wrap: break-word;
-    }
-
-    .editable-content ul, .editable-content ol {
-      margin-left: 20px;
-      margin-bottom: 10px;
-    }
-
-    .editable-content li {
-      margin-bottom: 5px;
-    }
-
-    .editable-content p {
-      margin-bottom: 10px;
-    }
-
-    .preview-render {
-      width: 100%;
-      min-height: 400px;
-      padding: 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.8;
-      background: white;
-      overflow-wrap: break-word;
-      white-space: normal;
-    }
-
-    .preview-render a {
-      color: #667eea;
-      text-decoration: underline;
-    }
-
-    .preview-render a:hover {
-      color: #764ba2;
-    }
-
-    .preview-render ul, .preview-render ol {
-      margin-left: 20px;
-      margin-bottom: 10px;
-    }
-
-    .preview-render li {
-      margin-bottom: 5px;
-    }
-
-    .preview-render p {
-      margin-bottom: 10px;
-    }
-
-    .preview-render strong {
-      font-weight: bold;
-    }
-
-    .preview-render em {
-      font-style: italic;
-    }
-
-    .preview-render u {
-      text-decoration: underline;
-    }
-
     .preview-tabs {
       display: flex;
       gap: 10px;
@@ -412,114 +348,143 @@
     }
 
     .preview-tab {
-      padding: 8px 16px;
+      padding: 10px 20px;
       background: #e0e0e0;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
       transition: all 0.3s ease;
+      flex: 1;
     }
 
     .preview-tab.active {
-      background: #667eea;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
     }
 
     .formatting-toolbar {
       display: flex;
-      gap: 5px;
-      padding: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
       background: #f8f9fa;
       border: 2px solid #e0e0e0;
       border-radius: 8px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+
+    .toolbar-group {
+      display: flex;
+      gap: 5px;
+      padding-right: 10px;
+      border-right: 1px solid #ccc;
+    }
+
+    .toolbar-group:last-child {
+      border-right: none;
     }
 
     .toolbar-btn {
-      padding: 6px 12px;
+      padding: 8px 12px;
       background: white;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 14px;
+      font-weight: 600;
       transition: all 0.2s ease;
-      min-width: 35px;
-      height: 35px;
+      min-width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: black !important;
-      width: 7%;
+      color: #333;
     }
 
     .toolbar-btn:hover {
       background: #e9ecef;
       border-color: #667eea;
-    }
-
-    .toolbar-btn.active {
-      background: #667eea;
-      color: white;
-      border-color: #667eea;
-    }
-
-    .toolbar-separator {
-      width: 1px;
-      background: #ccc;
-      margin: 0 5px;
+      transform: translateY(-1px);
     }
 
     .toolbar-select {
-      padding: 6px 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      padding: 8px 12px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
       background: white;
       font-size: 13px;
       cursor: pointer;
-      height: 35px;
-      margin-top: 2% important;
-      width: 7%!important;
-    }
-
-    .toolbar-select:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-
-    .color-picker-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-    .color-preview {
-      width: 25px;
-      height: 25px;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-block;
-      vertical-align: middle;
+      height: 40px;
+      font-weight: 600;
+      color: #333;
     }
 
     input[type="color"] {
-      opacity: 0;
-      position: absolute;
-      width: 100%;
-      height: 100%;
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    .editable-content[contenteditable="true"] {
-      outline: none;
-      cursor: text;
+    .editable-content {
+      width: 100%;
+      min-height: 400px;
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      background: white;
+      overflow-wrap: break-word;
     }
 
     .editable-content[contenteditable="true"]:focus {
+      outline: none;
       border-color: #667eea;
       box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .template-selector {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .template-option {
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .template-option:hover {
+      border-color: #667eea;
+      transform: translateX(5px);
+    }
+
+    .template-option.selected {
+      border-color: #667eea;
+      background: #667eea;
+      color: white;
+    }
+
+    .template-option h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .template-option p {
+      font-size: 12px;
+      opacity: 0.8;
     }
 
     .recipient-group {
@@ -530,9 +495,9 @@
     }
 
     .recipient-group label {
-      min-width: 40px;
+      min-width: 50px;
       margin-bottom: 0;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       color: #666;
     }
@@ -542,11 +507,51 @@
       margin-bottom: 0;
     }
 
+    .stats-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .stats-card h3 {
+      font-size: 36px;
+      margin-bottom: 5px;
+    }
+
+    .bulk-results {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 15px;
+    }
+
+    .bulk-result-item {
+      padding: 12px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bulk-result-item.success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+    }
+
+    .bulk-result-item.error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+    }
+
     @media (max-width: 1024px) {
       .main-content {
         grid-template-columns: 1fr;
       }
-      
+
       .form-section {
         border-right: none;
         border-bottom: 2px solid #e0e0e0;
@@ -556,11 +561,6 @@
       .preview-section {
         max-height: none;
       }
-
-        .toolbar-select {
-        margin-top: 2%;
-        }
-      
     }
   </style>
 </head>
@@ -568,430 +568,162 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>📧 AI Mail Bot</h1>
-      <p>Select a template, customize, preview, and send professional emails</p>
-    </div>
-
-    <div class="main-content">
-      <!-- LEFT SIDE: Form Section -->
-      <div class="form-section">
-        <div class="form-group">
-          <label class="required">Select Email Template</label>
-          <div class="search-box">
-            <input type="text" id="searchTemplate" placeholder="🔍 Search templates..." onkeyup="filterTemplates()">
-          </div>
-          <div class="template-grid" id="templateGrid"></div>
-          <input type="hidden" id="selectedTemplate">
-        </div>
-
-        <div class="form-group">
-          <label>Meeting Transcript / Context (Optional)</label>
-          <textarea id="transcript" placeholder="Paste meeting transcript, ticket details, or any context..."></textarea>
-          <div class="helper-text">Provide context to help AI customize the template</div>
-        </div>
-
-        <div class="form-group">
-          <label class="required">Email Recipients</label>
-          <div class="recipient-group">
-            <label>To:</label>
-            <input type="text" id="recipientTo" placeholder="email1@example.com, email2@example.com">
-          </div>
-          <div class="recipient-group">
-            <label>Cc:</label>
-            <input type="text" id="recipientCc" placeholder="Optional: cc1@example.com, cc2@example.com">
-          </div>
-          <div class="recipient-group">
-            <label>Bcc:</label>
-            <input type="text" id="recipientBcc" placeholder="Optional: bcc@example.com">
-          </div>
-          <div class="helper-text">Separate multiple emails with commas</div>
-        </div>
-
-        <div class="optional-fields">
-          <div class="optional-header">📎 Additional Fields</div>
-          
-          <div class="form-group">
-            <label>Client Name</label>
-            <input type="text" id="clientName" placeholder="John Doe">
-          </div>
-
-          <div class="form-group">
-            <label>Ticket Number</label>
-            <input type="text" id="ticketNumber" placeholder="TICK-12345">
-          </div>
-
-          <div class="form-group">
-            <label>Onboarding Tracker URL</label>
-            <input type="url" id="trackerUrl" placeholder="https://docs.google.com/spreadsheets/...">
-          </div>
-
-          <div class="form-group">
-            <label>Calendly Booking Link</label>
-            <input type="url" id="calendlyUrl" placeholder="https://calendly.com/...">
-          </div>
-
-          <div class="form-group">
-            <label>Additional Instructions</label>
-            <textarea id="extra" placeholder="E.g., 'Add 3 meeting time slots', 'Mention login issue', etc."></textarea>
-          </div>
-        </div>
-
-        <button id="generateBtn" onclick="generatePreview()">🔄 Generate Preview</button>
-        <div id="output" class="output"></div>
+      <h1><span>🚀</span><span>Cold Email Generator for Recruiters</span></h1>
+      <p>AI-Powered Email Generator for DevOps, SDE & Cybersecurity Positions</p>
+      <div class="mode-selector">
+        <button class="mode-btn active" onclick="switchMode('single')" id="singleModeBtn">📧 Single Email</button>
+        <button class="mode-btn" onclick="switchMode('bulk')" id="bulkModeBtn">📊 Bulk Send from Sheet</button>
       </div>
-
-      <!-- RIGHT SIDE: Preview Section -->
+    </div>
+    <div class="main-content">
+      <div class="form-section">
+        <div id="singleMode">
+          <div class="section-title">📝 Your Information</div>
+          <div class="form-group"><label class="required">Your Name</label><input type="text" id="yourName" value="Harsh Singh">
+          </div>
+          <div class="section-title" style="margin-top: 30px;">🎯 Target Role</div>
+          <div class="form-group">
+            <label class="required">Select Position Type</label>
+            <div class="role-selector">
+              <div class="role-card" onclick="selectRole('devops_cloud')" data-role="devops_cloud">
+                <div class="icon">☁️</div>
+                <h3>DevOps/Cloud</h3>
+                <p>Infrastructure & Automation</p>
+              </div>
+              <div class="role-card" onclick="selectRole('sde')" data-role="sde">
+                <div class="icon">💻</div>
+                <h3>SDE</h3>
+                <p>Software Development</p>
+              </div>
+              <div class="role-card" onclick="selectRole('soc_cybersecurity')" data-role="soc_cybersecurity">
+                <div class="icon">🔒</div>
+                <h3>SOC/Security</h3>
+                <p>Cybersecurity & Analysis</p>
+              </div>
+            </div>
+            <input type="hidden" id="selectedRole">
+          </div>
+          <div class="template-selector">
+            <label><strong>Email Type</strong></label>
+            <div class="helper-text" style="margin-bottom: 10px;">Choose the type of email</div>
+            <div class="template-option selected" onclick="selectTemplate('application')" data-template="application">
+              <h4>📧 Cold Application</h4>
+              <p>Initial outreach to recruiters</p>
+            </div>
+            <div class="template-option" onclick="selectTemplate('follow_up')" data-template="follow_up">
+              <h4>🔄 Follow-up Email</h4>
+              <p>Following up on previous application</p>
+            </div>
+            <div class="template-option" onclick="selectTemplate('thank_you')" data-template="thank_you">
+              <h4>🙏 Thank You Note</h4>
+              <p>Post-interview thank you</p>
+            </div>
+          </div>
+          <div class="section-title" style="margin-top: 30px;">🏢 Recipient Details</div>
+          <div class="form-group"><label>Recruiter Name</label><input type="text" id="recruiterName" placeholder="Sarah Johnson">
+          </div>
+          <div class="form-group"><label>Company Name</label><input type="text" id="companyName" placeholder="Google">
+          </div>
+          <div class="form-group"><label>Position Title</label><input type="text" id="positionTitle" placeholder="Senior DevOps Engineer">
+          </div>
+          <div class="form-group"><label>Job ID</label><input type="text" id="jobId" placeholder="JOB-2024-12345"></div>
+          <div class="form-group">
+            <label class="required">Recipient Email</label>
+            <div class="recipient-group"><label>To:</label><input type="email" id="recipientTo" placeholder="recruiter@company.com">
+            </div>
+            <div class="recipient-group"><label>Cc:</label><input type="email" id="recipientCc" placeholder="Optional">
+            </div>
+          </div>
+          <div class="section-title" style="margin-top: 30px;">✨ Customization</div>
+          <div class="form-group">
+            <label>Additional Instructions</label><textarea id="additionalInstructions" placeholder="E.g., 'Focus on AWS', 'Keep it under 200 words'"></textarea>
+          </div>
+          <button id="generateBtn" onclick="generatePreview()">🎨 Generate Preview</button>
+          <div id="output" class="output"></div>
+        </div>
+        <div id="bulkMode" style="display: none;">
+          <div class="stats-card">
+            <h3 id="recipientCount">0</h3>
+            <p>Recipients in Sheet</p>
+          </div>
+          <div class="section-title">📋 Bulk Email Setup</div>
+          <div class="output info" style="display: block;">
+            <strong>📊 Sheet Format:</strong><br><strong>Mandatory:</strong> Email<br><strong>Optional:</strong>
+            Recruiter Name | Position | Job ID | Company |
+            Status<br><em>Order: Email | Recruiter | Position | JobID | Company | Status</em><br><br><strong>Status Column:</strong>
+            Will auto-update to "Sent" or "Failed"<br><em>Already sent emails (Status = "Sent") will be skipped</em>
+          </div>
+          <div class="form-group"><label class="required">Your Name</label><input type="text" id="bulkYourName" value="Harsh Singh">
+          </div>
+          <div class="form-group">
+            <label>Additional Context</label><textarea id="bulkContext" placeholder="Additional info..."></textarea>
+          </div>
+          <button class="bulk-button" id="bulkSendBtn" onclick="sendBulkEmails()">📨 Send Bulk Emails</button>
+          <div id="bulkOutput" class="output"></div>
+          <div id="bulkResults" class="bulk-results"></div>
+        </div>
+      </div>
       <div class="preview-section">
         <div class="preview-header">📄 Email Preview</div>
-        
         <div id="previewEmpty" class="preview-box preview-empty">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
           <p><strong>No preview yet</strong></p>
-          <p>Select a template and click "Generate Preview"</p>
+          <p>Fill details and click Generate Preview</p>
         </div>
-
         <div id="previewContent" style="display: none;">
-          <label class="subject-label">Email Subject (editable)</label>
-          <input type="text" class="email-subject" id="emailSubject" placeholder="Subject line...">
-          
+          <label class="subject-label">Email Subject</label>
+          <input type="text" class="email-subject" id="emailSubject" placeholder="Subject...">
           <div class="preview-tabs">
-            <button class="preview-tab active" onclick="switchTab('preview')">📄 Preview</button>
+            <button class="preview-tab active" onclick="switchTab('view')">👁️ View</button>
             <button class="preview-tab" onclick="switchTab('edit')">✏️ Edit</button>
           </div>
-
-          <!-- Formatting Toolbar -->
-          <div id="formattingToolbar" class="formatting-toolbar" style="display: none;">
-            <button class="toolbar-btn" onclick="formatText('bold')" title="Bold (Ctrl+B)"><strong>B</strong></button>
-            <button class="toolbar-btn" onclick="formatText('italic')" title="Italic (Ctrl+I)"><em>I</em></button>
-            <button class="toolbar-btn" onclick="formatText('underline')" title="Underline (Ctrl+U)"><u>U</u></button>
-            <button class="toolbar-btn" onclick="formatText('strikeThrough')" title="Strikethrough"><s>S</s></button>
-            
-            <div class="toolbar-separator"></div>
-            
-            <select class="toolbar-select" onchange="changeFontSize(this.value)" title="Font Size">
-              <option value="">Size</option>
-              <option value="1">Small</option>
-              <option value="3" selected>Normal</option>
-              <option value="5">Large</option>
-              <option value="7">Huge</option>
-            </select>
-            
-            <div class="color-picker-wrapper">
-              <button class="toolbar-btn" title="Text Color">
-                <span style="border-bottom: 3px solid currentColor;">A</span>
-              </button>
-              <input type="color" id="textColor" onchange="changeTextColor(this.value)" title="Text Color">
-            </div>
-            
-            <div class="color-picker-wrapper">
-              <button class="toolbar-btn" title="Highlight Color">
-                <span style="background: yellow; padding: 2px 4px;">H</span>
-              </button>
-              <input type="color" id="bgColor" onchange="changeBackgroundColor(this.value)" value="#ffff00" title="Highlight">
-            </div>
-            
-            <div class="toolbar-separator"></div>
-            
-            <button class="toolbar-btn" onclick="formatText('justifyLeft')" title="Align Left">≡</button>
-            <button class="toolbar-btn" onclick="formatText('justifyCenter')" title="Align Center">≡</button>
-            <button class="toolbar-btn" onclick="formatText('justifyRight')" title="Align Right">≡</button>
-            
-            <div class="toolbar-separator"></div>
-            
-            <button class="toolbar-btn" onclick="formatText('insertUnorderedList')" title="Bullet List">• List</button>
-            <button class="toolbar-btn" onclick="formatText('insertOrderedList')" title="Numbered List">1. List</button>
-            <button class="toolbar-btn" onclick="formatText('indent')" title="Increase Indent">→</button>
-            <button class="toolbar-btn" onclick="formatText('outdent')" title="Decrease Indent">←</button>
-            
-            <div class="toolbar-separator"></div>
-            
-            <button class="toolbar-btn" onclick="insertLink()" title="Insert Link">🔗</button>
-            <button class="toolbar-btn" onclick="formatText('removeFormat')" title="Clear Formatting">✖</button>
+          <div id="previewView">
+            <textarea class="editable-content" id="emailBodyView" readonly style="resize: vertical;"></textarea>
           </div>
-
-          <div id="previewView" class="preview-render"></div>
-          <div id="editableEmail" class="editable-content" contenteditable="true" style="display: none;"></div>
-          
+          <div id="previewEdit" style="display: none;">
+            <div class="formatting-toolbar">
+              <div class="toolbar-group">
+                <button class="toolbar-btn" onclick="formatDoc('bold')" title="Bold"><strong>B</strong></button>
+                <button class="toolbar-btn" onclick="formatDoc('italic')" title="Italic"><em>I</em></button>
+                <button class="toolbar-btn" onclick="formatDoc('underline')" title="Underline"><u>U</u></button>
+                <button class="toolbar-btn" onclick="formatDoc('strikeThrough')" title="Strike"><s>S</s></button>
+              </div>
+              <div class="toolbar-group">
+                <select class="toolbar-select" onchange="formatDoc('fontSize', this.value)"><option value="">Size</option><option value="1">Small</option><option value="3">Normal</option><option value="5">Large</option><option value="7">Huge</option></select>
+              </div>
+              <div class="toolbar-group">
+                <input type="color" id="textColor" onchange="formatDoc('foreColor', this.value)" title="Text Color">
+                <input type="color" id="highlightColor" onchange="formatDoc('hiliteColor', this.value)" value="#ffff00" title="Highlight">
+              </div>
+              <div class="toolbar-group">
+                <button class="toolbar-btn" onclick="formatDoc('justifyLeft')" title="Left">☰</button>
+                <button class="toolbar-btn" onclick="formatDoc('justifyCenter')" title="Center">☰</button>
+                <button class="toolbar-btn" onclick="formatDoc('justifyRight')" title="Right">☰</button>
+              </div>
+              <div class="toolbar-group">
+                <button class="toolbar-btn" onclick="formatDoc('insertUnorderedList')" title="Bullets">•</button>
+                <button class="toolbar-btn" onclick="formatDoc('insertOrderedList')" title="Numbers">1.</button>
+                <button class="toolbar-btn" onclick="formatDoc('indent')" title="Indent">→</button>
+                <button class="toolbar-btn" onclick="formatDoc('outdent')" title="Outdent">←</button>
+              </div>
+              <div class="toolbar-group">
+                <button class="toolbar-btn" onclick="insertLink()" title="Link">🔗</button>
+                <button class="toolbar-btn" onclick="formatDoc('removeFormat')" title="Clear">✖</button>
+              </div>
+            </div>
+            <div class="editable-content" id="emailBodyEdit" contenteditable="true"></div>
+          </div>
           <button class="send-button" id="sendBtn" onclick="sendEmail()">📧 Send Email</button>
         </div>
       </div>
     </div>
   </div>
-
   <script>
-    const templates = {
-      "task_acknowledgement": { name: "Task Request Acknowledgement", category: "Acknowledgement" },
-      "issue_acknowledgement": { name: "Reported Issue Acknowledgement", category: "Issue Tracking" },
-      "no_action_needed": { name: "No Action Needed (Client)", category: "Resolution" },
-      "business_training_ack": { name: "Business/Training Task Acknowledgement (CSM)", category: "Training" },
-      "as_discussed": { name: "As Discussed (CS)", category: "Follow-up" },
-      "clarity_from_client": { name: "Clarity from Client - Ticket", category: "Clarification" },
-      "client_clarified": { name: "Client Clarified - Ticket", category: "Acknowledgement" },
-      "clarity_booking": { name: "Clarity + Booking (Client)", category: "Meeting" },
-      "split_solved": { name: "Split Solved → New Request (Client)", category: "Ticket Management" },
-      "ticket_solved": { name: "Ticket Solved", category: "Resolution" },
-      "due_date_update": { name: "Due Date Assignment Update", category: "Updates" },
-      "ownership_transfer": { name: "Ticket Ownership Transferred to CSM", category: "Escalation" },
-      "pw_field_question": { name: "PW Field Question", category: "Technical" },
-      "welcome_mail": { name: "Welcome Mail (Onboarding)", category: "Onboarding" },
-      "mom_action_items": { name: "MoM with Action Items", category: "Meeting Notes" },
-      "leave_application": { name: "Leave Application", category: "Internal" },
-      "cs_allocation": { name: "CS Allocation Request", category: "Internal" },
-      "request_access": { name: "Request Access", category: "Internal" },
-      "cname_record": { name: "CNAME Record Request", category: "Technical" },
-      "sign_off": { name: "Sign-Off Request", category: "Project Management" }
-    };
-
-    let selectedTemplate = '';
-    let generatedSubject = '';
-    let currentTab = 'preview';
-
-    function switchTab(tab) {
-      currentTab = tab;
-      const previewView = document.getElementById('previewView');
-      const editView = document.getElementById('editableEmail');
-      const toolbar = document.getElementById('formattingToolbar');
-      const tabs = document.querySelectorAll('.preview-tab');
-      
-      tabs.forEach(t => t.classList.remove('active'));
-      
-      if (tab === 'preview') {
-        previewView.style.display = 'block';
-        editView.style.display = 'none';
-        toolbar.style.display = 'none';
-        tabs[0].classList.add('active');
-        // Sync preview with edits - directly copy HTML content
-        previewView.innerHTML = editView.innerHTML;
-      } else {
-        previewView.style.display = 'none';
-        editView.style.display = 'block';
-        toolbar.style.display = 'flex';
-        tabs[1].classList.add('active');
-      }
-    }
-
-    function convertToHTML(text) {
-      // Convert line breaks to <br> but preserve existing HTML
-      return text.replace(/\n/g, '<br>');
-    }
-
-    // Rich text formatting functions
-    function formatText(command) {
-      document.execCommand(command, false, null);
-      document.getElementById('editableEmail').focus();
-    }
-
-    function changeFontSize(size) {
-      if (size) {
-        document.execCommand('fontSize', false, size);
-        document.getElementById('editableEmail').focus();
-      }
-    }
-
-    function changeTextColor(color) {
-      document.execCommand('foreColor', false, color);
-      document.getElementById('editableEmail').focus();
-    }
-
-    function changeBackgroundColor(color) {
-      document.execCommand('hiliteColor', false, color);
-      document.getElementById('editableEmail').focus();
-    }
-
-    function insertLink() {
-      const url = prompt('Enter the URL:');
-      if (url) {
-        document.execCommand('createLink', false, url);
-        document.getElementById('editableEmail').focus();
-      }
-    }
-
-    // Keyboard shortcuts
-    document.addEventListener('DOMContentLoaded', function() {
-      document.addEventListener('keydown', function(e) {
-        const editableEmail = document.getElementById('editableEmail');
-        if (editableEmail && editableEmail.style.display !== 'none') {
-          // Ctrl+B for Bold
-          if (e.ctrlKey && e.key === 'b') {
-            e.preventDefault();
-            formatText('bold');
-          }
-          // Ctrl+I for Italic
-          if (e.ctrlKey && e.key === 'i') {
-            e.preventDefault();
-            formatText('italic');
-          }
-          // Ctrl+U for Underline
-          if (e.ctrlKey && e.key === 'u') {
-            e.preventDefault();
-            formatText('underline');
-          }
-          // Tab key for indentation
-          if (e.key === 'Tab') {
-            e.preventDefault();
-            document.execCommand('insertHTML', false, '&nbsp;&nbsp;&nbsp;&nbsp;');
-          }
-        }
-      });
-    });
-
-    window.onload = function() {
-      const grid = document.getElementById('templateGrid');
-      Object.keys(templates).forEach(key => {
-        const template = templates[key];
-        const card = document.createElement('div');
-        card.className = 'template-card';
-        card.setAttribute('data-template', key);
-        card.setAttribute('data-name', template.name.toLowerCase());
-        card.onclick = () => selectTemplate(key);
-        card.innerHTML = `<h3>${template.name}</h3><p>${template.category}</p>`;
-        grid.appendChild(card);
-      });
-    };
-
-    function selectTemplate(templateKey) {
-      selectedTemplate = templateKey;
-      document.getElementById('selectedTemplate').value = templateKey;
-      document.querySelectorAll('.template-card').forEach(el => el.classList.remove('selected'));
-      document.querySelector(`[data-template="${templateKey}"]`).classList.add('selected');
-    }
-
-    function filterTemplates() {
-      const searchTerm = document.getElementById('searchTemplate').value.toLowerCase();
-      document.querySelectorAll('.template-card').forEach(card => {
-        const name = card.getAttribute('data-name');
-        card.style.display = name.includes(searchTerm) ? 'block' : 'none';
-      });
-    }
-
-    function generatePreview() {
-      const template = document.getElementById("selectedTemplate").value;
-      const transcript = document.getElementById("transcript").value.trim();
-      const recipientTo = document.getElementById("recipientTo").value.trim();
-      const clientName = document.getElementById("clientName").value.trim();
-      const ticketNumber = document.getElementById("ticketNumber").value.trim();
-      const trackerUrl = document.getElementById("trackerUrl").value.trim();
-      const calendlyUrl = document.getElementById("calendlyUrl").value.trim();
-      const extra = document.getElementById("extra").value.trim();
-      
-      const output = document.getElementById("output");
-      const btn = document.getElementById("generateBtn");
-
-      if (!template) {
-        showOutput("Please select a template", "error");
-        return;
-      }
-
-      if (!recipientTo) {
-        showOutput("Please enter at least one recipient email", "error");
-        return;
-      }
-
-      btn.disabled = true;
-      btn.innerHTML = 'Generating Preview<span class="loading"></span>';
-
-      const context = {
-        template: template,
-        transcript: transcript,
-        clientName: clientName,
-        ticketNumber: ticketNumber,
-        trackerUrl: trackerUrl,
-        calendlyUrl: calendlyUrl,
-        additionalInstructions: extra
-      };
-
-      google.script.run
-        .withSuccessHandler((result) => {
-          generatedSubject = result.subject;
-          document.getElementById('emailSubject').value = result.subject;
-          
-          // Convert line breaks to <br> for proper display
-          const formattedBody = result.body.replace(/\n/g, '<br>');
-          document.getElementById('editableEmail').innerHTML = formattedBody;
-          document.getElementById('previewView').innerHTML = formattedBody;
-          
-          document.getElementById('previewEmpty').style.display = 'none';
-          document.getElementById('previewContent').style.display = 'block';
-          
-          // Reset to preview tab
-          currentTab = 'preview';
-          document.getElementById('previewView').style.display = 'block';
-          document.getElementById('editableEmail').style.display = 'none';
-          document.getElementById('formattingToolbar').style.display = 'none';
-          document.querySelectorAll('.preview-tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.preview-tab')[0].classList.add('active');
-          
-          showOutput("✅ Preview generated! Edit subject/body if needed, then click Send.", "success");
-          btn.disabled = false;
-          btn.innerHTML = '🔄 Generate Preview';
-        })
-        .withFailureHandler((err) => {
-          showOutput("❌ Error: " + err, "error");
-          btn.disabled = false;
-          btn.innerHTML = '🔄 Generate Preview';
-        })
-        .generateEmailPreview(context);
-    }
-
-    function sendEmail() {
-      const recipientTo = document.getElementById("recipientTo").value.trim();
-      const recipientCc = document.getElementById("recipientCc").value.trim();
-      const recipientBcc = document.getElementById("recipientBcc").value.trim();
-      const emailSubject = document.getElementById("emailSubject").value.trim();
-      const emailBody = document.getElementById("editableEmail").innerHTML;
-      
-      if (!recipientTo) {
-        showOutput("Please enter recipient email addresses", "error");
-        return;
-      }
-
-      if (!emailSubject) {
-        showOutput("Please enter an email subject", "error");
-        return;
-      }
-
-      const btn = document.getElementById("sendBtn");
-      btn.disabled = true;
-      btn.innerHTML = 'Sending Email<span class="loading"></span>';
-
-      const emailData = {
-        to: recipientTo,
-        cc: recipientCc,
-        bcc: recipientBcc,
-        subject: emailSubject,
-        body: emailBody
-      };
-
-      google.script.run
-        .withSuccessHandler(() => {
-          showOutput("✅ Email sent successfully!", "success");
-          btn.disabled = false;
-          btn.innerHTML = '📧 Send Email';
-          
-          // Reset form
-          setTimeout(() => {
-            document.getElementById('previewEmpty').style.display = 'block';
-            document.getElementById('previewContent').style.display = 'none';
-          }, 2000);
-        })
-        .withFailureHandler((err) => {
-          showOutput("❌ Error sending email: " + err, "error");
-          btn.disabled = false;
-          btn.innerHTML = '📧 Send Email';
-        })
-        .sendFinalEmail(emailData);
-    }
-
-    function showOutput(message, type) {
-      const output = document.getElementById("output");
-      output.className = "output " + type;
-      output.textContent = message;
-      if (type === "success") {
-        setTimeout(() => output.style.display = "none", 5000);
-      }
-    }
+    let selectedRole='',selectedTemplate='application';function switchMode(m){const s=document.getElementById('singleMode'),b=document.getElementById('bulkMode'),sb=document.getElementById('singleModeBtn'),bb=document.getElementById('bulkModeBtn');if(m==='single'){s.style.display='block';b.style.display='none';sb.classList.add('active');bb.classList.remove('active');}else{s.style.display='none';b.style.display='block';sb.classList.remove('active');bb.classList.add('active');loadRecipientCount();}}function selectRole(r){selectedRole=r;document.getElementById('selectedRole').value=r;document.querySelectorAll('.role-card').forEach(e=>e.classList.remove('selected'));document.querySelector(`[data-role="${r}"]`).classList.add('selected');}function selectTemplate(t){selectedTemplate=t;document.querySelectorAll('.template-option').forEach(e=>e.classList.remove('selected'));document.querySelector(`[data-template="${t}"]`).classList.add('selected');}function switchTab(t){const v=document.getElementById('previewView'),e=document.getElementById('previewEdit'),tabs=document.querySelectorAll('.preview-tab');tabs.forEach(t=>t.classList.remove('active'));if(t==='view'){v.style.display='block';e.style.display='none';tabs[0].classList.add('active');document.getElementById('emailBodyView').value=document.getElementById('emailBodyEdit').innerText;}else{v.style.display='none';e.style.display='block';tabs[1].classList.add('active');document.getElementById('emailBodyEdit').focus();}}function formatDoc(c,v=null){document.execCommand(c,false,v);document.getElementById('emailBodyEdit').focus();}function insertLink(){const u=prompt('Enter URL:');if(u)formatDoc('createLink',u);}function loadRecipientCount(){google.script.run.withSuccessHandler(d=>{document.getElementById('recipientCount').textContent=d.length;}).withFailureHandler(e=>{showOutput('bulkOutput','❌ Error: '+e,'error');}).getSheetData();}function generatePreview(){const r=document.getElementById('selectedRole').value,n=document.getElementById('yourName').value.trim(),t=document.getElementById('recipientTo').value.trim();if(!r){showOutput('output','Please select a position type','error');return;}if(!n||!t){showOutput('output','Please fill required fields','error');return;}const b=document.getElementById('generateBtn');b.disabled=true;b.innerHTML='🔄 Generating<span class="loading"></span>';const c={template:selectedTemplate==='application'?r:selectedTemplate,yourName:n,recruiterName:document.getElementById('recruiterName').value.trim()||'Hiring Manager',companyName:document.getElementById('companyName').value.trim(),positionTitle:document.getElementById('positionTitle').value.trim(),jobId:document.getElementById('jobId').value.trim(),position:r.replace('_','/').toUpperCase(),additionalInstructions:document.getElementById('additionalInstructions').value.trim()};google.script.run.withSuccessHandler(res=>{document.getElementById('emailSubject').value=res.subject;document.getElementById('emailBodyView').value=res.body;const f=res.body.replace(/\n/g,'<br>');document.getElementById('emailBodyEdit').innerHTML=f;document.getElementById('previewEmpty').style.display='none';document.getElementById('previewContent').style.display='block';switchTab('view');showOutput('output','✅ Preview generated!','success');b.disabled=false;b.innerHTML='🎨 Generate Preview';}).withFailureHandler(e=>{showOutput('output','❌ Error: '+e.message,'error');b.disabled=false;b.innerHTML='🎨 Generate Preview';}).generateEmailPreview(c);}function sendEmail(){const t=document.getElementById('recipientTo').value.trim(),c=document.getElementById('recipientCc').value.trim(),s=document.getElementById('emailSubject').value.trim(),b=document.getElementById('emailBodyEdit').innerHTML,n=document.getElementById('yourName').value.trim(),r=document.getElementById('selectedRole').value;if(!t||!s){showOutput('output','Please enter recipient and subject','error');return;}const btn=document.getElementById('sendBtn');btn.disabled=true;btn.innerHTML='📧 Sending<span class="loading"></span>';const d={to:t,cc:c,bcc:'',subject:s,body:b,senderName:n,role:r};google.script.run.withSuccessHandler(()=>{showOutput('output','✅ Email sent!','success');btn.disabled=false;btn.innerHTML='📧 Send Email';setTimeout(()=>{document.getElementById('previewEmpty').style.display='block';document.getElementById('previewContent').style.display='none';},3000);}).withFailureHandler(e=>{showOutput('output','❌ Error: '+e,'error');btn.disabled=false;btn.innerHTML='📧 Send Email';}).sendFinalEmail(d);}function sendBulkEmails(){const n=document.getElementById('bulkYourName').value.trim();if(!n){showOutput('bulkOutput','Please fill your name','error');return;}const b=document.getElementById('bulkSendBtn');b.disabled=true;b.innerHTML='📨 Sending<span class="loading"></span>';const c={yourName:n,additionalInstructions:document.getElementById('bulkContext').value.trim()};document.getElementById('bulkResults').innerHTML='';showOutput('bulkOutput','⏳ Processing...','info');google.script.run.withSuccessHandler(res=>{b.disabled=false;b.innerHTML='📨 Send Bulk Emails';const sc=res.filter(r=>r.status==='success').length,fc=res.filter(r=>r.status==='error').length;showOutput('bulkOutput',`✅ Complete! Success: ${sc} | Failed: ${fc}`,sc===res.length?'success':'info');const h=res.map(r=>`<div class="bulk-result-item ${r.status}"><span><strong>${r.email}</strong></span><span>${r.status==='success'?'✅ Sent':'❌ '+r.message}</span></div>`).join('');document.getElementById('bulkResults').innerHTML=h;}).withFailureHandler(e=>{showOutput('bulkOutput','❌ Error: '+e,'error');b.disabled=false;b.innerHTML='📨 Send Bulk Emails';}).sendBulkEmails(c);}function showOutput(i,m,t){const o=document.getElementById(i);o.className='output '+t;o.innerHTML=m;if(t==='success'){setTimeout(()=>{o.style.display='none';},5000);}}document.addEventListener('keydown',e=>{const ed=document.getElementById('emailBodyEdit');if(!ed||ed.style.display==='none')return;if(e.ctrlKey&&e.key==='b'){e.preventDefault();formatDoc('bold');}else if(e.ctrlKey&&e.key==='i'){e.preventDefault();formatDoc('italic');}else if(e.ctrlKey&&e.key==='u'){e.preventDefault();formatDoc('underline');}});window.onload=()=>{selectTemplate('application');};
   </script>
 </body>
+
 </html>
